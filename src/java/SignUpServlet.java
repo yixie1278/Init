@@ -1,20 +1,21 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlet;
+
 
 import UserPackage.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 /**
  *
  * @author yixxie
@@ -30,34 +31,41 @@ public class SignUpServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SignUpServlet</title>");            
+            out.println("<head>");     
             out.println("</head>");
             out.println("<body>");
             ServletContext sc=this.getServletContext();
-            User user=(User) sc.getAttribute("RegisterForm");
-            if(user==null){
-                user=new User();
-                sc.setAttribute("RegisterForm",user);
+            
+            User b=(User) sc.getAttribute("RegisterForm");
+            if(b==null){
+                b=new User();
+                sc.setAttribute("RegisterForm",b);
             }
-            user.setFirstName(request.getParameter("inuptFName"));
-            user.setLastName(request.getParameter("inuptLName"));
-            user.setUserName(request.getParameter("UserName"));
-            user.setPassword(request.getParameter("inputPassword"));
-            
-            RequestDispatcher dispatcher =getServletContext().getRequestDispatcher("http://localhost:8080/308Project/temp.jsp");
-            dispatcher.forward(request, response);
-            
-            
-            
+            b.setFirstName(request.getParameter("fName"));
+            b.setLastName(request.getParameter("LName"));
+            b.setUserName(request.getParameter("UserID"));
+            b.setPassword(request.getParameter("password"));
+     
           
+            /**if(b.isValid()){
+               RequestDispatcher dispatcher =getServletContext().getRequestDispatcher("/JSPS/success.jsp");
+               dispatcher.forward(request, response);
+            }
+            
+            else{
+               RequestDispatcher dispatcher =getServletContext().getRequestDispatcher("/JSPS/form.jsp");
+               dispatcher.forward(request, response);
+            }*/
+            
+            RequestDispatcher dispatcher =getServletContext().getRequestDispatcher("/homePageMember.jsp");
+            dispatcher.forward(request, response);
             out.println("</body>");
             out.println("</html>");
         }
@@ -103,3 +111,4 @@ public class SignUpServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+

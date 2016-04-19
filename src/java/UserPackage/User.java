@@ -5,16 +5,18 @@
  */
 package UserPackage;
 
+import java.io.Serializable;
+
 /**
  *
  * @author yixxie
  */
-public class User {
+public class User implements Serializable {
     //private String userId;
     private String userName;
     private String password;
-    private String firstName;
-    private String lastName;
+    private String firstName="aaa";
+    private String lastName="ssss";
     private int role;
     
     /**
