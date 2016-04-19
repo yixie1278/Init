@@ -5,8 +5,11 @@
  */
 package Servlet;
 
+import UserPackage.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +41,23 @@ public class SignUpServlet extends HttpServlet {
             out.println("<title>Servlet SignUpServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SignUpServlet at " + request.getContextPath() + "</h1>");
+            ServletContext sc=this.getServletContext();
+            User user=(User) sc.getAttribute("RegisterForm");
+            if(user==null){
+                user=new User();
+                sc.setAttribute("RegisterForm",user);
+            }
+            user.setFirstName(request.getParameter("inuptFName"));
+            user.setLastName(request.getParameter("inuptLName"));
+            user.setUserName(request.getParameter("UserName"));
+            user.setPassword(request.getParameter("inputPassword"));
+            
+            RequestDispatcher dispatcher =getServletContext().getRequestDispatcher("http://localhost:8080/308Project/temp.jsp");
+            dispatcher.forward(request, response);
+            
+            
+            
+          
             out.println("</body>");
             out.println("</html>");
         }
