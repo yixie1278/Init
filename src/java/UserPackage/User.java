@@ -6,17 +6,28 @@
 package UserPackage;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 /**
  *
  * @author yixxie
  */
+@Entity
+@Table
 public class User implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO) 
     //private String userId;
     private String userName;
     private String password;
-    private String firstName="aaa";
-    private String lastName="ssss";
+    private String firstName;
+    private String lastName;
     private int role;
     
     /**
